@@ -2,10 +2,14 @@
 // Every few frames, an explosion will appear.
 // You can also click the screen to create an explosion.
 
+// Particle generators
 ArrayList<Generator> generators;
 
 // Delay (in frames) between new explosions
 int EXP_DELAY = 50;
+
+// Save each frame as an image
+boolean RECORD = false;
 
 void setup() {
   size(600, 600);
@@ -36,11 +40,13 @@ void draw() {
     Generator gen = new Generator(center);
     generators.add(gen);
   }
-  
-  if (frameCount < EXP_DELAY * 6)
-    saveFrame("out/frame-####.png");
-  else
-    exit();
+
+  if (RECORD) {
+    if (frameCount < EXP_DELAY * 6)
+      saveFrame("out/frame-####.png");
+    else
+      exit();
+  }
 }
 
 void mouseClicked() {
